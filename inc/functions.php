@@ -58,10 +58,32 @@ function getRandomQuote($quotes) {
 }
 
 // Print out an HTML string for a random quote
-function printQuote(): string {
+function printQuote($quotes): void {
     // Call getRandomQuote to recieve quote data
+    $quote = getRandomQuote($quotes);
 
-    // Interpolate quote data into HTML template
+    // Interpolate basic quote data into HTML template
+    $html = <<<QUOTE
+        <p class="quote">{$quote['quote']}</p>
+        <p class="source">
+            {$quote['source']}
+QUOTE;
+
+    // If citation is present on quote,
+    if (array_key_exists('citation', $quote)) {
+        // Insert it into HTML
+        $html .= "<span class=\"citation\">{$quote['citation']}</span>";
+    }
+
+    // If year is present on quote,
+    if (array_key_exists('year', $quote)) {
+        // Insert it into HTML
+        $html .= "<span class=\"year\">{$quote['year']}</span>";
+    }
+
+    // Finish HTML string
+    $html .= "</p>";
 
     // Print out HTML data
+    echo $html;
 }
