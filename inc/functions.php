@@ -45,8 +45,23 @@ $quotes = [
     ]
 ];
 
-// Create the getRandomQuote function and name it getRandomQuote
+// Select a random quote from the array of quotes
+function getRandomQuote($quotes) {
+    // Count number of quotes in array
+    $count = count($quotes);
 
+    // Select a random index from the quotes array
+    $index = rand(0, $count - 1);
 
+    // Return the quote data stored at that index
+    return $quotes[$index];
+}
 
-// Create the printQuote funtion and name it printQuote
+// Print out an HTML string for a random quote
+function printQuote(): string {
+    // Call getRandomQuote to recieve quote data
+
+    // Interpolate quote data into HTML template
+
+    // Print out HTML data
+}
