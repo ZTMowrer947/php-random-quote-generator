@@ -34,8 +34,10 @@ $quotes = [
         "tags" => ["United States", "Presidential"]
     ],
     [
-        "quote" => "Never, never, never give up.",
+        "quote" => "Never give in — never, never, never, never, in nothing great or small, large or petty, never give in except to convictions of honour and good sense",
         "source" => "Winston Churchill",
+        "citation" => "Speech given at Harrow School, Harrow, England",
+        "year" => 1941,
         "tags" => ["United Kingdom", "WWII", "Inspirational"]
     ],
     [
@@ -43,6 +45,20 @@ $quotes = [
         "quote" => "It does not matter how slowly you go as long as you do not stop.",
         "source" => "Confucius",
         "tags" => ["China", "Inspirational"]
+    ],
+    [
+        "quote" => "Any sufficiently advanced technology is indistinguishable from magic.",
+        "source" => "Arthur C. Clarke",
+        "citation" => "Profiles of the Future",
+        "year" => 1973,
+        "tags" => ["Thought-provoking"]
+    ],
+    [
+        "quote" => "Nothing is decided entirely by fate... All things determine their destinies.",
+        "source" => "Tippi",
+        "citation" => "Super Paper Mario",
+        "year" => 2007,
+        "tags" => ["Mario", "Thought-provoking"]
     ]
 ];
 
@@ -64,11 +80,11 @@ function printQuote($quotes): void {
     $quote = getRandomQuote($quotes);
 
     // Interpolate basic quote data into HTML template
-    $html = <<<QUOTE
+    $html = <<<QUOTE_START
         <p class="quote">{$quote['quote']}</p>
         <p class="source">
             {$quote['source']}
-QUOTE;
+QUOTE_START;
 
     // If citation is present on quote,
     if (array_key_exists('citation', $quote)) {
@@ -82,8 +98,14 @@ QUOTE;
         $html .= "<span class=\"year\">{$quote['year']}</span>";
     }
 
-    // Finish HTML string
-    $html .= "</p>";
+    // Join tags into a single string
+    $tags = implode(", ", $quote['tags']);
+
+    // Add tags into and finish HTML string
+    $html .= <<<QUOTE_END
+        </p>
+        <p class="tags">Tags: $tags</p>
+QUOTE_END;
 
     // Print out HTML data
     echo $html;
