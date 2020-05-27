@@ -39,6 +39,7 @@ $quotes = [
         "tags" => ["United Kingdom", "WWII", "Inspirational"]
     ],
     [
+        // Thanks to Lee V for sharing this quote in the FSJS Techdegree a while ago!
         "quote" => "It does not matter how slowly you go as long as you do not stop.",
         "source" => "Confucius",
         "tags" => ["China", "Inspirational"]
@@ -86,4 +87,36 @@ QUOTE;
 
     // Print out HTML data
     echo $html;
+}
+
+// Generates a CSS color string for a random background color
+function getRandomBackgroundColor(): string {
+    // Generate random values for red, green, and blue
+    $red = rand(0, 192);
+    $green = rand(0, 192);
+    $blue = rand(0, 192);
+
+    // Construct CSS color string
+    $color = "rgba($red, $green, $blue)";
+
+    // Return color string
+    return $color;
+}
+
+// Print out CSS style elements to set background color
+function printBackgroundColorStyle(): void {
+    // Get background color string
+    $bg = getRandomBackgroundColor();
+
+    // Create <style> elements to set background color
+    $style = <<<STYLE
+        <style>
+            body, #loadQuote {
+                background-color: $bg;
+            }
+        </style>
+STYLE;
+
+    // Print out style HTML
+    echo $style;
 }
